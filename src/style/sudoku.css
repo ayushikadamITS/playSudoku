@@ -170,10 +170,6 @@
   background-color: rgb(193, 193, 214);
 }
 
-aadhi aur derhi You,
-Now but ye to scr m a gyi hogi n already Shikha Sharma,
-Now
-
 /* Default (Light) Mode Styling */
 body {
   color: #000000;
@@ -463,4 +459,8 @@ body.dark-mode {
     height: 5px;
     font-size: 6px;
   }
+}
+
+.highlighted {
+  background-color: #e0e0e0;
 }

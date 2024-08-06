@@ -325,6 +325,7 @@ const SudokuGame = () => {
   return (
     <>
       <div className={`game-container ${darkMode ? "dark-mode" : ""}`}>
+        <div>Ads</div>
         <div className="sudoku-game">
           <div className="controls">
             <select
@@ -405,7 +406,7 @@ const SudokuGame = () => {
             ))}
           </div>
         </div>
-        <div className="button-container">
+         <div className="button-container">
           <div className="btn-head">
             <span>Mistakes: {mistakesCount}/3</span>
             <span>{formatTime(timer)}</span>
@@ -502,6 +503,7 @@ const SudokuGame = () => {
             </button>
           </div>
         </div>
+        <div>Ads</div>
       </div>
       <Modal show={mistakesModal} darkMode={darkMode}>
         <>
