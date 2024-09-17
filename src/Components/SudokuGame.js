@@ -5,7 +5,7 @@ import "../style/modal.css";
 import { fillBoard } from "../utils/fillTheBoard";
 import sodukoStore from "../utils/sudokuStore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Modal from "../CommonComponents/CustomModal";
+import Modal from "../CommonComponents/Modal";
 import {
   faUndo,
   faEraser,
@@ -20,6 +20,7 @@ import Tooltip from "../CommonComponents/Tooltip";
 
 const difficulties = {
   easy: 40,
+  // easy: 78,
   medium: 30,
   hard: 20,
 };
@@ -166,25 +167,29 @@ const SudokuGame = () => {
       }
     }
   };
-
   const updateCellValue = (row, col, value) => {
     const oldValue = board[row][col];
+
+    if (oldValue === value) {
+      return;
+    }
+
     const newBoard = board.map((row) => [...row]);
     newBoard[row][col] = value;
     setBoard(newBoard);
 
     if (!isValidMove(row, col, value)) {
-      setMistakesCount((prevCount) => {
-        const newCount = prevCount + 1;
-        return newCount;
-      });
+      setMistakesCount((prevCount) => prevCount + 1);
       setInvalidCells([
         ...invalidCells.filter((cell) => cell !== `${row}-${col}`),
         `${row}-${col}`,
       ]);
+      console.log("Mistake detected, showing error modal.");
+      setErrorModal(true); // Show the error modal
     } else {
       setInvalidCells(invalidCells.filter((cell) => cell !== `${row}-${col}`));
     }
+
     setMoveHistory([...moveHistory, { row, col, oldValue, newValue: value }]);
   };
 
@@ -224,7 +229,7 @@ const SudokuGame = () => {
         }, 1);
       } else {
         setTimeout(() => {
-          setErrorModal(true);
+          // setErrorModal(true);
         }, 1);
       }
     }
@@ -249,6 +254,7 @@ const SudokuGame = () => {
     setTimeout(() => {
       if (mistakesCount >= 3) {
         setMistakesModal(true);
+        setErrorModal(false);
       }
     }, 0);
   }, [board, mistakesCount]);
@@ -296,8 +302,10 @@ const SudokuGame = () => {
     setMistakesModal(false);
     setWinModal(false);
     setErrorModal(false);
+    setHint(false)
     startNewGame(difficulty);
     setMistakesCount(0);
+    setHintCount(3);
   };
 
   const formatTime = (time) => {
@@ -309,16 +317,26 @@ const SudokuGame = () => {
   };
 
   const showHint = () => {
-    if (!isPaused) {
-      const newHint = generateHint(board);
+    if (!isPaused && selectedCell) {
+      const { row, col } = selectedCell; // Get the selected cell
+      const newHint = generateHint(board, row, col); // Pass selected cell to generateHint
+
       if (newHint) {
-        setHint(newHint);
-        setHintCount((pre) => pre - 1);
-        setSelectedCell({ row: newHint.cell[0], col: newHint.cell[1] });
+        if (
+          hint &&
+          hint.cell[0] === newHint.cell[0] &&
+          hint.cell[1] === newHint.cell[1]
+        ) {
+          alert("This cell already has a hint. Try again.");
+        } else {
+          setHint(newHint);
+          setHintCount((pre) => pre - 1);
+        }
       } else {
-        // For No any hint available
-        alert("No obvious hints available at this time.");
+        alert("No obvious hints available for the selected cell.");
       }
+    } else {
+      alert("Please select a cell first.");
     }
   };
 
@@ -336,7 +354,10 @@ const SudokuGame = () => {
               <option value="medium">Medium</option>
               <option value="hard">Hard</option>
             </select>
-            <button onClick={() => setDarkMode(!darkMode)}>
+            <button
+              className="theme_toggle_btn"
+              onClick={() => setDarkMode(!darkMode)}
+            >
               {darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
             </button>
           </div>
@@ -406,7 +427,7 @@ const SudokuGame = () => {
             ))}
           </div>
         </div>
-         <div className="button-container">
+        <div className="button-container">
           <div className="btn-head">
             <span>Mistakes: {mistakesCount}/3</span>
             <span>{formatTime(timer)}</span>
@@ -507,22 +528,26 @@ const SudokuGame = () => {
       </div>
       <Modal show={mistakesModal} darkMode={darkMode}>
         <>
-          <h1 style={{ color: "red" }}>Game Over</h1>
-          <p style={{ fontSize: "20px" }}>
+          <h1 style={{ color: "red", textAlign: "center" }}>Game Over</h1>
+          <p style={{ fontSize: "15px", textAlign: "center" }}>
             You have made 3 mistakes and lost this Game
           </p>
           <button
             className="modal-button"
             onClick={() => handleStartNewGameAndCloseModal()}
           >
-            New Game
+            Start New Game
           </button>
         </>
       </Modal>
       <Modal show={winModal} darkMode={darkMode}>
         <>
-          <h1 style={{ color: "green" }}>Congratulations..</h1>
-          <p style={{ fontSize: "20px" }}>You won the game...!!</p>
+          <h1 style={{ color: "green", textAlign: "center" }}>
+            Congratulations..
+          </h1>
+          <p style={{ fontSize: "15px", textAlign: "center" }}>
+            You won the game...!!
+          </p>
           <button
             className="modal-button"
             onClick={() => handleStartNewGameAndCloseModal()}
@@ -534,8 +559,10 @@ const SudokuGame = () => {
 
       <Modal show={errorModal} darkMode={darkMode}>
         <>
-          <h1 style={{ color: "red" }}>Error...</h1>
-          <p style={{ fontSize: "20px" }}>Please Enter valid moves...!</p>
+          <h1 style={{ color: "red", textAlign: "center" }}>Error...</h1>
+          <p style={{ fontSize: "15px", textAlign: "center" }}>
+            Please Enter valid moves...!
+          </p>
           <button className="modal-button" onClick={() => setErrorModal(false)}>
             Ok
           </button>

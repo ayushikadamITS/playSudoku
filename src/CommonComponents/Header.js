@@ -9,10 +9,11 @@ const Header = () => {
       <div className="container">
         <nav className="navbar navbar-expand-lg">
           <div className="container-fluid">
-            <a className="navbar-brand"
+            <a className="navbar-brand" href={window.location.href}
             //  href="https://intelliatech.com/" 
-            target="_blank" rel="noopener noreferrer">
-              <img src={logo} alt="Intelliatech" className="img_logo" />
+            // target="_blank" rel="noopener noreferrer"
+            >
+              <img src={logo} alt="Intelliatech" className="img_logo"/>
             </a>
             <button 
               className="navbar-toggler" 
