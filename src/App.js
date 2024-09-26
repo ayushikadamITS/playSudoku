@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
+import ReactGA from "react-ga4";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useNavigate,
+
 } from "react-router-dom";
 import SudokuGame from "./Components/SudokuGame";
 import Header from "./CommonComponents/Header";
@@ -11,21 +12,28 @@ import Footer from "./CommonComponents/Footer";
 import "animate.css";
 import "./App.css";
 
+
+
 function App() {
+  useEffect(() => {
+    ReactGA.initialize("G-Z7209ZJ8T8");
+  }, []);
+
   return (
     <Router>
       <Header />
       <div className="App">
         <Routes>
-          {/* <Route path="/sudoku" element={<SudokuGame />} /> */}
           <Route path="/" element={<SudokuGame />} />
-          {/* <Route path="/" element={<Home />} /> */}
         </Routes>
       </div>
       <Footer />
     </Router>
   );
 }
+
+export default App;
+
 
 // function Home() {
 //   const navigate = useNavigate();
@@ -45,4 +53,4 @@ function App() {
 //   );
 // }
 
-export default App;
+

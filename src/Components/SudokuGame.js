@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ReactGA from "react-ga4";
 import "../style/sudoku.css";
 import "../style/winModal.css";
 import "../style/modal.css";
@@ -89,6 +90,12 @@ const SudokuGame = () => {
   }, [darkMode]);
 
   const startNewGame = (diff) => {
+    // Tracking event with Google Analytics
+    ReactGA.event({
+      category: "Game",
+      action: "Start New Game",
+      label: `Difficulty: ${diff}`,
+    });
     const newBoard = generateSudoku(diff);
     setBoard(newBoard);
     const initial = [];
