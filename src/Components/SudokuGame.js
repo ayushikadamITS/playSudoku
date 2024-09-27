@@ -96,6 +96,9 @@ const SudokuGame = () => {
       action: "Start New Game",
       label: `Difficulty: ${diff}`,
     });
+    // Reset mistakes and hints
+    setMistakesCount(0);
+    setHintCount(3);
     const newBoard = generateSudoku(diff);
     setBoard(newBoard);
     const initial = [];
@@ -309,7 +312,8 @@ const SudokuGame = () => {
     setMistakesModal(false);
     setWinModal(false);
     setErrorModal(false);
-    setHint(false)
+    // setHint(false)
+    setHint(null);
     startNewGame(difficulty);
     setMistakesCount(0);
     setHintCount(3);

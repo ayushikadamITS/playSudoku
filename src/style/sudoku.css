@@ -55,7 +55,8 @@
 }
 
 .sudoku-cell.selected {
-  background-color: #e0e0e0;
+  /* background-color: #e0e0e0; */
+  background-color: lightblue;
   color: #000;
 }
 
@@ -276,12 +277,13 @@ body.dark-mode {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  font-size: 13px;
-  color: gray;
+  font-size: 8px;
+  color: rgb(100, 97, 97);
   width: 100%;
   height: 100%;
   align-items: center;
   justify-items: center;
+  
 }
 
 .notes span {
