@@ -8,6 +8,8 @@
   margin-top: 20px;
   /* margin-right: 50px; */
   gap:60px;
+  overflow-y: scroll;
+  
 }
 
 .sudoku-game {
@@ -17,6 +19,7 @@
   justify-content: center;
   margin-top: 30px;
   /* margin-left: 80px; */
+  
 }
 
 .controls {
