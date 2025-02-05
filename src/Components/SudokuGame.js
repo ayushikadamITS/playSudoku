@@ -317,6 +317,7 @@ const SudokuGame = () => {
     startNewGame(difficulty);
     setMistakesCount(0);
     setHintCount(3);
+    // setIsPaused(false)
   };
 
   const formatTime = (time) => {
@@ -354,7 +355,7 @@ const SudokuGame = () => {
   return (
     <>
       <div className={`game-container ${darkMode ? "dark-mode" : ""}`}>
-        <div>Ads</div>
+        {/* <div>Ads</div> */}
         <div className="sudoku-game">
           <div className="controls">
             <select
@@ -528,14 +529,15 @@ const SudokuGame = () => {
           <div className="btn-row">
             <button
               className="last-btn-col"
-              disabled={isPaused}
+              disabled={false}
               onClick={() => startNewGame(difficulty)}
+              
             >
               New Game
             </button>
           </div>
         </div>
-        <div>Ads</div>
+        {/* <div>Ads</div> */}
       </div>
       <Modal show={mistakesModal} darkMode={darkMode}>
         <>

@@ -12,8 +12,6 @@ import Footer from "./CommonComponents/Footer";
 import "animate.css";
 import "./App.css";
 
-
-
 function App() {
   useEffect(() => {
     ReactGA.initialize("G-Z7209ZJ8T8");

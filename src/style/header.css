@@ -1,4 +1,4 @@
-.header_sec{
+/* .header_sec{
     background: #fff;
     min-height: 80px;
     display: flex;
@@ -21,3 +21,61 @@
     color: #BF1F26;
     font-weight: bold;
 }
+ */
+ /* Default header styling */
+/* Default header styling */
+.header_sec {
+  background: #fff;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  left: 0;
+  width: 100%;
+  z-index: 99999;
+}
+
+.img_logo {
+  max-width: 100%;
+  height: 40px; 
+}
+
+.header_sec .navbar-nav {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-start; /* Align items to the left */
+}
+
+.header_sec .navbar-nav .nav-link.active,
+.header_sec .navbar-nav .nav-link.show {
+  color: #BF1F26;
+  font-weight: bold;
+}
+
+/* Always Show Mobile Logo */
+.mobile-logo-container {
+  display: none; /* Hide by default */
+}
+
+.mobile-logo {
+  max-width: 100%;
+  height: 40px; /* Adjust size as needed */
+}
+
+/* Mobile View: Hide Full Header and Show Mobile Logo */
+@media (max-width: 768px) {
+  /* Hide full header */
+  .header_sec {
+    display: none;
+  }
+
+  /* Show mobile logo */
+  .mobile-logo-container {
+    display: block;
+    text-align: left; /*Align mobile logo to the left*/
+    padding: 10px 0;
+    padding-left: 15px; /*left padding for mobile logo*/
+  }
+}
+

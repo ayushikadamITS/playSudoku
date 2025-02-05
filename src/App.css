@@ -14,6 +14,7 @@ body {
   align-items: center; */
   padding-top: 80px;
   padding-bottom: 50px;
+  overflow-y: scroll;
 }
 
 h1 {
@@ -42,3 +43,20 @@ button:hover {
   border-radius: 10px;
 }
 
+@media(max-width:767px){
+  .App{
+    padding-top: 0px;
+  }
+  .game-container{
+    margin-top: 0;
+  }
+  .button-container{
+    margin-top: 0;
+  }
+  .button_section{
+    margin-top: 0;
+  }   
+  .sudoku-game{
+    margin-top: 0;
+  }
+}
