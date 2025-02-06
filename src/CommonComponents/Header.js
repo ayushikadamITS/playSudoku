@@ -1,8 +1,9 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../style/header.css";
-import logo from "../assets/logo.png"; // Desktop Logo
-import logo2 from "../assets/logo2.png"; // Mobile Logo
+// import logo from "../assets/logo.png"; // Desktop Logo
+import logo2 from "../assets/logo2.gif"; // Mobile Logo
+
 
 const Header = () => {
   return (
@@ -20,9 +21,10 @@ const Header = () => {
               <a className="navbar-brand" href={window.location.href}>
                 {/* Desktop Logo */}
                 <img
-                  src={logo}
+                  // src={logo}
+                  src={logo2}
                   alt="Desktop Logo"
-                  className="img_logo desktop-logo"
+                  className="img_logo1 desktop-logo"
                 />
               </a>
               <button

@@ -23,6 +23,12 @@
     color:#BF1F26;
     font-weight: bold !important;
 }
+.footer_text{
+      display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 @media (max-width: 768px) {
   .footer_sec {
     display: none;
